@@ -1,0 +1,573 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+#include <stdint.h>
+
+#define ascend(a,b)  (a>b) ? 1 : ((a<b) ? -1 : 0)
+#define decend(a,b)  (a>b) ? -1 : ((a<b) ? 1 : 0)
+
+struct Collection{
+	bool				jail;		// Boolean
+	int					holiday;
+	char				vase;
+	unsigned long		cherries;
+	short int			exchange;	// Boolean
+	bool				frogs;		// Boolean
+	bool				waves;		// Boolean
+	int					girl;		// Boolean
+	unsigned short int	cent;
+	char				bomb[8];
+	int8_t				houses;
+	float				garden;
+	double				grain;
+	int					mother;		// Boolean
+	double				push;
+    long int			fire;
+};
+
+typedef struct Collection stuff;
+
+struct inCollection{
+	short int			jail;
+	float				holiday;
+	char				vase;
+	int8_t				cherries;
+	bool				exchange;
+	char				threeBools;
+	//frogs
+	//waves
+	//girl
+	short int			cent;
+	char				bomb[11];
+	int8_t				houses;
+	double				garden;
+	float				grain;
+	short int			mother;
+	float				push;
+	int					fire;
+};
+
+typedef struct inCollection stuffIn;
+
+stuff* readOneCollection(FILE *fptr){
+	
+	stuff *OGptr;
+	stuffIn *ptr;
+	OGptr = (stuff *)malloc(sizeof(stuff));
+	
+	if(fread(&(ptr->jail), sizeof(short int), 1, fptr) != 1){
+		free(ptr);
+		return NULL;
+	}
+	if(fread(&(ptr->holiday), sizeof(float), 1, fptr) != 1){
+		free(ptr);
+		return NULL;
+	}
+	if(fread(&(ptr->vase), sizeof(char), 1, fptr) != 1){
+		free(ptr);
+		return NULL;
+	}
+	if(fread(&(ptr->cherries), sizeof(int8_t), 1, fptr) != 1){
+		free(ptr);
+		return NULL;
+	}
+	if(fread(&(ptr->exchange), sizeof(bool), 1, fptr) != 1){
+		free(ptr);
+		return NULL;
+	}
+	if(fread(&(ptr->threeBools), sizeof(char), 1, fptr) != 1){
+		free(ptr);
+		return NULL;
+	}
+	if(fread(&(ptr->cent), sizeof(short int), 1, fptr) != 1){
+		free(ptr);
+		return NULL;
+	}
+	fseek(fptr, 2, SEEK_CUR);
+	if(fread((ptr->bomb), sizeof(char[11]), 1, fptr) != 1){
+		free(ptr);
+		return NULL;
+	}
+	if(fread(&(ptr->houses), sizeof(int8_t), 1, fptr) != 1){
+		free(ptr);
+		return NULL;
+	}
+	if(fread(&(ptr->garden), sizeof(double), 1, fptr) != 1){
+		free(ptr);
+		return NULL;
+	}
+	if(fread(&(ptr->grain), sizeof(float), 1, fptr) != 1){
+		free(ptr);
+		return NULL;
+	}
+	if(fread(&(ptr->mother), sizeof(short int), 1, fptr) != 1){
+		free(ptr);
+		return NULL;
+	}
+	if(fread(&(ptr->push), sizeof(float), 1, fptr) != 1){
+		free(ptr);
+		return NULL;
+	}
+	if(fread(&(ptr->fire), sizeof(int), 1, fptr) != 1){
+		free(ptr);
+		return NULL;
+	}
+	
+	(OGptr->jail) = (bool)(ptr->jail);
+	(OGptr->holiday) = (int)(ptr->holiday);
+	(OGptr->vase) = (char)(ptr->vase);
+	(OGptr->cherries) = (unsigned long)(ptr->cherries);
+	(OGptr->exchange) = (short int)(ptr->exchange);
+	(OGptr->frogs) = (bool)(ptr->threeBools);
+	(OGptr->waves) = (bool)(ptr->threeBools);
+	(OGptr->girl) = (int)(ptr->threeBools);
+	(OGptr->cent) = (unsigned short int)(ptr->cent);
+	strcpy((OGptr->bomb), (ptr->bomb));
+	(OGptr->houses) = (int8_t)(ptr->houses);
+	(OGptr->garden) = (float)(ptr->garden);
+	(OGptr->grain) = (double)(ptr->grain);
+	(OGptr->mother) = (int)(ptr->mother);
+	(OGptr->push) = (double)(ptr->push);
+	(OGptr->fire) = (long int)(ptr->fire);
+	
+	
+	return OGptr;
+}
+
+void writeFile(char fileName[], stuff** StuffptrArray, int nmemb){
+	
+	FILE * f;
+	f =	fopen(fileName, "wb");
+	if(f == NULL){
+		fprintf(stderr,"Error! File May Be NULL\n %s", fileName);
+		
+		//Program exits if the file pointer returns NULL.
+		exit(1);
+	}
+	
+	
+	int n;
+	for(n = 0; n < nmemb; n++){
+		fwrite(&StuffptrArray[n]->jail, sizeof(StuffptrArray[n]->jail), 1, f);
+		fwrite(&StuffptrArray[n]->holiday, sizeof(StuffptrArray[n]->holiday), 1, f);
+		fwrite(&StuffptrArray[n]->vase, sizeof(StuffptrArray[n]->vase), 1, f);
+		fwrite(&StuffptrArray[n]->cherries, sizeof(StuffptrArray[n]->cherries), 1, f);
+		fwrite(&StuffptrArray[n]->exchange, sizeof(StuffptrArray[n]->exchange), 1, f);
+		fwrite(&StuffptrArray[n]->frogs, sizeof(StuffptrArray[n]->frogs), 1, f);
+		fwrite(&StuffptrArray[n]->waves, sizeof(StuffptrArray[n]->waves), 1, f);
+		fwrite(&StuffptrArray[n]->girl, sizeof(StuffptrArray[n]->girl), 1, f);
+		fwrite(&StuffptrArray[n]->cent, sizeof(StuffptrArray[n]->cent), 1, f);
+		fwrite(&StuffptrArray[n]->bomb, sizeof(StuffptrArray[n]->bomb), 1, f);
+		fwrite(&StuffptrArray[n]->houses, sizeof(StuffptrArray[n]->houses), 1, f);
+		fwrite(&StuffptrArray[n]->garden, sizeof(StuffptrArray[n]->garden), 1, f);
+		fwrite(&StuffptrArray[n]->grain, sizeof(StuffptrArray[n]->grain), 1, f);
+		fwrite(&StuffptrArray[n]->mother, sizeof(StuffptrArray[n]->mother), 1, f);
+		fwrite(&StuffptrArray[n]->push, sizeof(StuffptrArray[n]->push), 1, f);
+		fwrite(&StuffptrArray[n]->fire, sizeof(StuffptrArray[n]->fire), 1, f);
+		
+	}
+	
+	fclose(f);
+}
+
+/*
+void printFunc(stuff ** printStruct, int numPtr){
+	
+	printf("jail, holiday, vase, cherries, exchange, frogs, waves, girl, "
+		"cent, bomb, houses, garden, grain, mother, push, fire\n");
+	
+	int i;
+	for(i = 0; i < numPtr; i++){
+		
+		printf("%i, %i, %c, %lu, %i, %i, %i, %i, %u, %s, %i, %f, %f, %i, %f, "
+			"%lx\n",
+			printStruct[i]->jail, printStruct[i]->holiday, 
+			printStruct[i]->vase, printStruct[i]->cherries,
+			printStruct[i]->exchange, printStruct[i]->frogs,
+			printStruct[i]->waves, printStruct[i]->girl,
+			printStruct[i]->cent, printStruct[i]->bomb,
+			printStruct[i]->houses, printStruct[i]->garden,
+			printStruct[i]->grain, printStruct[i]->mother,
+			printStruct[i]->push, printStruct[i]->fire);
+	}
+}
+*/
+
+
+stuff** readFile(char fileName[], int* nmemb)
+{
+	
+	FILE * fptr;
+	fptr = fopen(fileName, "rb");
+	
+	if(fptr == NULL){
+		fprintf(stderr,"Error! File could not be opened. %s \n ", fileName );
+		exit(1);
+	}
+	stuff **ptrArray = NULL;
+	stuff *structPtr;
+	
+	int numPtr = 0;
+	
+	
+	for(;;){
+		
+		structPtr = readOneCollection(fptr);
+		if(structPtr == NULL){
+			break;
+		}
+		
+		ptrArray = (stuff **)realloc(ptrArray, sizeof(stuff*)*(numPtr + 1));
+		
+		ptrArray[numPtr] = structPtr;
+		
+		numPtr++;
+	}
+	
+	//printFunc(ptrArray, numPtr);
+	*nmemb = numPtr;
+	fclose(fptr);
+	return ptrArray;
+}
+
+void usage(){
+	fprintf(stderr, "Usage: The given file does not exist\n");
+	
+	// Program exits if the file name is invalid or file doesnt exits.
+	exit(1);
+}
+
+
+
+// Decimal: 28
+// Octal: 034 (0 before)
+// Hex: 0x1c (0x before)
+
+int compareStuff(const void * a, const void * b){
+	
+	stuff* A = (*(stuff**)a);
+	stuff* B = (*(stuff**)b);
+	
+	/*vase*/
+	if((A->vase) > (B->vase)){
+		return 1;
+	}
+	else if ((A->vase) < (B->vase)){
+		return -1;
+	}
+	//res[0] = (A->vase) - (B->vase);			
+	
+	
+	/*waves*/
+	if((A->waves) > (B->waves)){
+		return 1;
+	}
+	else if ((A->waves) < (B->waves)){
+		return -1;
+	}
+	//res[1] = (A->waves) - (B->waves);
+	
+	
+	/*exchnge*/
+	if((A->exchange) > (B->exchange)){
+		return 1;
+	}
+	else if ((A->exchange) < (B->exchange)){
+		return -1;
+	}
+	//res[2] = (A->exchange) - (B->exchange);
+	
+	
+	/*frogs*/
+	if((A->frogs) > (B->frogs)){
+		return 1;
+	}
+	else if ((A->frogs) < (B->frogs)){
+		return -1;
+	}
+	//res[3] = (A->frogs) - (B->frogs);
+	
+	
+	/*fire*/
+	if(A->fire > B->fire){ 
+		return 1;
+	}
+	else if(A->fire < B->fire){ 
+		return -1;
+	}
+	//res[4] = ((A->fire) > (B->fire)) ? 1 : (((A->fire) < (B->fire)) ? -1 : (0));
+	
+	
+	/*bomb*/
+	if(strcmp(A->bomb, B->bomb) > 0){
+		return 1;
+	}
+	else if(strcmp(A->bomb, B->bomb) < 0){
+		return -1;
+	}
+	//res[5] = strcmp(A->bomb,B->bomb);
+	
+	
+	/*cent*/
+	if(((A->cent) - (B->cent)) > 0){ 
+		return -1;
+	}
+	else if(((A->cent) - (B->cent)) < 0){ 
+		return 1;
+	}
+	//res[6] = (B->cent) - (A->cent);
+	
+	
+	/*holiday*/	
+	if((A->holiday) < (B->holiday)){ 
+		return 1;
+	}
+	else if((A->holiday) > (B->holiday)){ 
+		return -1;
+	}
+	//res[7] = (B->holiday) - (A->holiday);
+	
+	
+	/*jail*/
+	if((A->jail) > (B->jail)){ 
+		return 1;
+	}
+	else if((A->jail) < (B->jail)){ 
+		return -1;
+	}
+	//res[8] = (A->jail) - (B->jail);
+	
+	
+	/*grain*/
+	if((A->grain) > (B->grain)){ 
+		return 1;
+	}
+	else if((A->grain) < (B->grain)){ 
+		return -1;
+	}
+	//res[9] = ascend(A->grain,B->grain);
+	
+	
+	/*push*/
+	if((A->push) > (B->push)){ 
+		return 1;
+	}
+	else if((A->push) < (B->push)){ 
+		return -1;
+	}
+	//res[10] = ((A->push) > (B->push)) ? 1 : (((A->push) < (B->push)) ? -1 : (0));
+	
+	
+	/*girl*/
+	if((A->girl) > (B->girl)){ 
+		return 1;
+	}
+	else if((A->girl) < (B->girl)){ 
+		return -1;
+	}
+	//res[11] = (A->girl) - (B->girl);
+	
+	
+	/*cherries*/
+	if((A->cherries) < (B->cherries)){
+		return 1;
+	}
+	else if((A->cherries) > (B->cherries)){
+		return -1;
+	}
+	//res[12] = (B->cherries) - (A->cherries);
+	
+	
+	/*mother*/
+	if((A->mother) < (B->mother)){
+		return 1;
+	}
+	else if((A->mother) > (B->mother)){
+		return -1;
+	}
+	//res[13] = (B->mother) - (A->mother);
+	
+	
+	/*garden*/
+	if((A->garden) > (B->garden)){ 
+		return 1;
+	}
+	else if((A->garden) < (B->garden)){ 
+		return -1;
+	}
+	//res[14] = (A->garden) - (B->garden);
+	
+	
+	/*houses*/
+	if((A->houses) > (B->houses)){ 
+		return 1;
+	}
+	else if((A->houses) < (B->houses)){ 
+		return -1;
+	}
+	//res[15] = (A->houses) - (B->houses);
+	
+	
+	return 0;
+}
+
+void readByte(int offset, char *filename) {
+    unsigned char byte;
+    unsigned char mask = 1; // Bit mask
+    unsigned char bits[8];
+    int k;
+    FILE *fd = fopen(filename, "rb");
+
+    for (k=47; k<offset; k++) {
+      fseek(fd, k, SEEK_SET);
+      fread(&byte, sizeof(byte), 1, fd);
+
+      // Extract the bits
+      for (int i = 0; i < 8; i++) {
+          // Mask each bit in the byte and store it
+          bits[i] = (byte & (mask << i)) != 0;
+      }
+      printf("Offset: %d;  Bits: %d,%d,%d,%d,%d,%d,%d,%d\n",
+              k, bits[0],bits[1],bits[2],bits[3],bits[4],bits[5],bits[6],
+              bits[7]);
+    }
+    fclose(fd);
+}
+
+struct Test {
+    int intt;
+    short int sint;
+    long int lint;
+    float floatt;
+    double doublet;
+    bool boolt;
+    char chart;
+    unsigned int uintt;
+    unsigned char uchar;
+    int8_t uuint;
+};
+
+bool test(stuff ** dataRec, char *filename) {
+      int i;
+      struct Test test;
+      FILE *fd = fopen(filename, "rb");
+      //char strings[2];
+      int offset;
+
+	// If unable to find file specify return a error
+    if (fd == NULL) {
+       fputs("Unable to find file\n", stderr);
+       exit(2);
+    }
+
+      //change
+	unsigned short int checkVal = dataRec[0]->exchange;
+	for (offset=0; offset<48; offset++) {
+      printf("Value: %i Offset: %d\n", checkVal, offset);
+
+      fread(&test.intt, sizeof(test.intt), 1, fd); fseek(fd, offset, SEEK_SET);
+      fread(&test.sint, sizeof(test.sint), 1, fd); fseek(fd, offset, SEEK_SET);
+      fread(&test.lint, sizeof(test.lint), 1, fd); fseek(fd, offset, SEEK_SET);
+      fread(&test.floatt, sizeof(test.floatt), 1, fd); fseek(fd, offset, SEEK_SET);
+      fread(&test.doublet, sizeof(test.doublet), 1, fd); fseek(fd, offset, SEEK_SET);
+      fread(&test.boolt, sizeof(test.boolt), 1, fd); fseek(fd, offset, SEEK_SET);
+      fread(&test.chart, sizeof(test.chart), 1, fd); fseek(fd, offset, SEEK_SET);
+      fread(&test.uintt, sizeof(test.uintt), 1, fd); fseek(fd, offset, SEEK_SET);
+      fread(&test.uchar, sizeof(test.uchar), 1, fd); fseek(fd, offset, SEEK_SET);
+      fread(&test.uuint, sizeof(test.uuint), 1, fd); fseek(fd, offset, SEEK_SET);
+      //fread(&strings, sizeof(strings), 1, fd); fseek(fd, offset, SEEK_SET);
+
+      //printf("u int: %d\n", test.uuint);
+	  //printf("float: %f\n", test.floatt);
+      if (checkVal == (unsigned short int)test.intt) {
+              printf("int: %d\n", test.intt); }
+      if (checkVal == (unsigned short int)test.sint)  {
+              printf("short int: %d\n", test.sint); }
+      if (checkVal == (unsigned short int)test.lint)  {
+              printf("long int: %ld \n", test.lint); }
+      if (checkVal == (unsigned short int)test.floatt)  {
+              printf("float: %f\n", test.floatt); }
+      if (checkVal == (unsigned short int)test.doublet)  {
+              printf("double: %f\n", test.doublet); }
+      if (checkVal == (unsigned short int)test.boolt)  {
+              printf("bool: %d\n", test.boolt); }
+      if (checkVal == (unsigned short int)test.chart)  {
+              printf("char: %c\n", test.chart); }
+      if (checkVal == (unsigned short int)test.uintt)  {
+              printf("unsigned int: %d\n", test.chart); }
+      if (checkVal == (unsigned short int)test.uchar)  {
+              printf("unsigned char: %c\n", test.uchar); }
+      if (checkVal == (unsigned short int)test.uuint) {
+              printf("u int: %d\n", test.uuint); }
+      //if (strcmp(checkVal,strings))  {
+        //      printf("strings: %s\n", strings); }
+	}
+	fclose(fd);
+
+  return 0;
+}
+
+void printFuncInTable(stuff ** printStruct, int numPtr){
+	
+	printf("%5s | %11s | %4s | %20s | %8s | %5s | %5s | %5s | %6s | %8s | %6s"
+	" | %12s | %12s | %7s | %11s | %20s", "jail", "holiday", "vase",""
+	"cherries", "exchange", "frogs", "waves", "girl", "cent", "bomb",""
+	"houses", "garden", "grain", "mother", "push", "fire\n");
+	
+	int i;
+	for(i = 0; i < numPtr; i++){
+		
+		printf("%5i | %11i | %4c | %20lu | %8i | %5i | %5i | %5i | %6u "
+		"| %8s | %6i | %12f | %12f | %7i | %11f | %20lx\n",
+			printStruct[i]->jail, printStruct[i]->holiday,
+			printStruct[i]->vase, printStruct[i]->cherries,
+			printStruct[i]->exchange, printStruct[i]->frogs,
+			printStruct[i]->waves, printStruct[i]->girl,
+			printStruct[i]->cent, printStruct[i]->bomb,
+			printStruct[i]->houses, printStruct[i]->garden,
+			printStruct[i]->grain, printStruct[i]->mother,
+			printStruct[i]->push, printStruct[i]->fire);
+	}
+}
+
+int main(int argc, char **argv) {
+	
+	
+	
+	if(argc < 2){
+		usage();
+	}
+	
+	
+	
+	int nmemb;
+	stuff** StuffptrArray = readFile(argv[1],&nmemb);
+	
+	//test(StuffptrArray, argv[2]);
+	//readByte(48, argv[2]);
+	
+	printFuncInTable(StuffptrArray, nmemb);
+	
+	//printFunc(StuffptrArray, nmemb);
+	//printf("File Before Sorting! ! !\n");
+	//printf("\n");
+	
+	
+	//qsort(StuffptrArray,nmemb,sizeof(stuff**),&compareStuff);
+	//printFunc(StuffptrArray, nmemb);
+	
+	//writeFile(argv[2],StuffptrArray,nmemb);
+	
+	//printFuncInTable(StuffptrArray, nmemb);
+	//printf("Sorted! ! !\n");
+	
+	int n;
+	for(n = 0; n < nmemb; ++n) {
+		free(StuffptrArray[n]);
+	}
+	free(StuffptrArray);
+	return 0;
+	
+	exit(0);
+}

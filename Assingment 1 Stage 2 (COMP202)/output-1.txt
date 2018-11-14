@@ -1,0 +1,2 @@
+jail, holiday, vase, cherries, exchange, frogs, waves, girl, cent, bomb, houses, garden, grain, mother, push, fire
+1, 35356718, j, 44795339520, 0, 0, 0, 1, 763, expert, -2, -0.000051, -19.996642, 0, -1.578708, eab800321e3

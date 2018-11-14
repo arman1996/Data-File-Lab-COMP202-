@@ -1,0 +1,19 @@
+This file lists the initial values for your data record.
+ 
+ 
+The field called 'jail' is initialised to 0  
+The field called 'holiday' is initialised to decimal value 28 written as octal  
+The field called 'vase' is initialised to the character 'S'
+The field called 'cherries' is initialised to decimal number 169 converted to hexadecimal  
+The field called 'exchange' is initialised to 0  
+The field called 'frogs' is initialised to 1  
+The field called 'waves' is initialised to 1  
+The field called 'girl' is initialised to 1  
+The field called 'cent' is initialised to the decimal number 1594  
+The field called 'bomb' is initialised to the string "apples"
+The field called 'houses' is initialised to the decimal number -2  
+The field called 'garden' is initialised to 70.616928  
+The field called 'grain' is initialised to -0.016311  
+The field called 'mother' is initialised to 0  
+The field called 'push' is initialised to -0.000014  
+The field called 'fire' is initialised to the decimal number -1591  

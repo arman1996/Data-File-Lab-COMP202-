@@ -1,0 +1,19 @@
+
+Sorting order (in order of precedence):
+ 
+vase in ascending order. 
+waves in ascending order. 
+exchange in ascending order. 
+frogs in ascending order. 
+fire in ascending order. 
+bomb in ascending order. 
+cent in descending order. 
+holiday in descending order. 
+jail in ascending order. 
+grain in ascending order. 
+push in ascending order. 
+girl in ascending order. 
+cherries in descending order. 
+mother in descending order. 
+garden in ascending order. 
+houses in ascending order. 

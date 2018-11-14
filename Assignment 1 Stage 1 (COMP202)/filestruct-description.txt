@@ -1,0 +1,19 @@
+This file lists the fields of your data records in the order they occur in data files.
+
+
+The jail field shall be a Boolean occupying one byte
+The holiday field shall be an integer occupying four bytes
+The vase field shall be a character occupying one byte
+The cherries field shall be an unsigned integer occupying eight bytes
+The exchange field shall be a Boolean occupying two bytes
+The frogs field shall be a Boolean occupying one byte
+The waves field shall be a Boolean occupying one byte
+The girl field shall be a Boolean occupying four bytes
+The cent field shall be an unsigned integer occupying two bytes
+The bomb field shall be a fixed-length string that can contain 8 characters (including nulls at the end)
+The houses field shall be an integer occupying one byte
+The garden field shall be a floating point number occupying four bytes
+The grain field shall be a floating point number occupying eight bytes
+The mother field shall be a Boolean occupying four bytes
+The push field shall be a floating point number occupying eight bytes
+The fire field shall be an integer occupying eight bytes
